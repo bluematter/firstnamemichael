@@ -71,30 +71,39 @@ export default function About() {
             </h1>
             <div className='mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400'>
               <p>
-                I’ve loved making things for as long as I can remember, and
-                wrote my first program when I was 6 years old, just two weeks
-                after my mom brought home the brand new Macintosh LC 550 that I
-                taught myself to type on.
+                I started off playing sports and fell in love with coding at the
+                age of 17. I grew up in the 90s, and was a part of the early
+                stages of the internet. I remember when the first web browser
+                was released, and I was hooked. The new wave of the internet and
+                gaming had me hooked. Some examples of technologies I used in my
+                early years were AIM and the Sims -- I cannot forget those two.
               </p>
               <p>
-                The only thing I loved more than computers as a kid was space.
-                When I was 8, I climbed the 40-foot oak tree at the back of our
-                yard while wearing my older sister’s motorcycle helmet, counted
-                down from three, and jumped — hoping the tree was tall enough
-                that with just a bit of momentum I’d be able to get to orbit.
+                I grew up in a small town called Jacksonville, Illinois. There
+                we're only 18,000 people in that town, not a whole lot of
+                dreamers. I always knew I was a big dreamer, and at the age of
+                23 I packed everything up and headed to Silicon Valley with
+                $300, some computer skills, and a big dream.
               </p>
               <p>
-                I spent the next few summers indoors working on a rocket design,
-                while I recovered from the multiple surgeries it took to fix my
-                badly broken legs. It took nine iterations, but when I was 15 I
-                sent my dad’s Blackberry into orbit and was able to transmit a
-                photo back down to our family computer from space.
+                I spent the next few years working at tech companies in Mountain
+                View, CA and in San Francisco. I lived in my car for the first
+                year to build up my base. Most of this was possible due to the
+                attitude of the city and the kindess of the folks at the Hacker
+                Dojo (at the time on Fairchild, right by Google)
               </p>
               <p>
-                Today, I’m the founder of Planetaria, where we’re working on
-                civilian space suits and manned shuttle kits you can assemble at
-                home so that the next generation of kids really <em>can</em>{' '}
-                make it to orbit — from the comfort of their own backyards.
+                Today, I’m the founder of{' '}
+                <a
+                  className='text-blue-600'
+                  href='https://motionbox.io'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  Motionbox
+                </a>
+                , where we’re working on video sales tools to enable sales teams
+                to close more deals in a unique way.
               </p>
             </div>
           </div>
