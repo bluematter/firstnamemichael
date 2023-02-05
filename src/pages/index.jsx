@@ -326,7 +326,10 @@ export async function getStaticProps() {
 
   return {
     props: {
-      articles: (await getAllArticles()).slice(0, 4).map(({ ...meta }) => meta),
+      // eslint-disable-next-line unused-imports/no-unused-vars
+      articles: (await getAllArticles())
+        .slice(0, 4)
+        .map(({ component, ...meta }) => meta),
     },
   };
 }

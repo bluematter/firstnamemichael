@@ -2,7 +2,7 @@ import { Popover, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { Fragment, useEffect, useRef } from 'react';
 
 import { Container } from '@/components/Container';
@@ -137,7 +137,8 @@ function MobileNavigation(props) {
 }
 
 function NavItem({ href, children }) {
-  let isActive = useRouter().pathname === href;
+  // let isActive = useRouter().pathname === href;
+  const isActive = false;
 
   return (
     <li>
@@ -249,7 +250,8 @@ function Avatar({ large = false, className, ...props }) {
 }
 
 export function Header() {
-  let isHomePage = useRouter().pathname === '/';
+  // let isHomePage = useRouter().pathname === '/';
+  const isHomePage = false;
 
   let headerRef = useRef();
   let avatarRef = useRef();

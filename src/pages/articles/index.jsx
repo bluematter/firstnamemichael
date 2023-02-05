@@ -64,7 +64,8 @@ export default function ArticlesIndex({ articles }) {
 export async function getStaticProps() {
   return {
     props: {
-      articles: (await getAllArticles()).map(({ ...meta }) => meta),
+      // eslint-disable-next-line unused-imports/no-unused-vars
+      articles: (await getAllArticles()).map(({ component, ...meta }) => meta),
     },
   };
 }
