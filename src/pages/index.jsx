@@ -103,7 +103,12 @@ function Article({ article }) {
 
 function SocialLink({ icon: Icon, ...props }) {
   return (
-    <Link className='group -m-1 p-1' {...props}>
+    <Link
+      className='group -m-1 p-1'
+      {...props}
+      target='_blank'
+      rel='noopener noreferrer'
+    >
       <Icon className='h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300' />
     </Link>
   );
@@ -269,13 +274,13 @@ export default function Home({ articles }) {
       <Container className='mt-9'>
         <div className='max-w-2xl'>
           <h1 className='text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl'>
-            Software designer, founder, and amateur astronaut.
+            Hi, I’m Michael Aubry 👋
           </h1>
           <p className='mt-6 text-base text-zinc-600 dark:text-zinc-400'>
             I’m Michael, a software designer and entrepreneur based in San
-            Diego. I’m the founder and CEO of Planetaria, where we develop
-            technologies that empower regular people to explore space on their
-            own terms.
+            Diego. I’m the founder of Motionbox, where we develop video sales
+            solutions that empower teams to sell more stuff, faster. Follow me
+            on social and join my newsletter 👇
           </p>
           <div className='mt-6 flex gap-6'>
             <SocialLink
@@ -298,6 +303,24 @@ export default function Home({ articles }) {
               aria-label='Follow on LinkedIn'
               icon={LinkedInIcon}
             />
+          </div>
+          <div className='mt-6'>
+            <p className='mt-2 text-sm text-zinc-600 dark:text-zinc-400'>
+              Get notified when I publish something new, and unsubscribe at any
+              time.
+            </p>
+            <div className='mt-4 flex'>
+              <input
+                type='email'
+                placeholder='Email address'
+                aria-label='Email address'
+                required
+                className='min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm'
+              />
+              <Button type='submit' className='ml-4 flex-none'>
+                Join
+              </Button>
+            </div>
           </div>
         </div>
       </Container>

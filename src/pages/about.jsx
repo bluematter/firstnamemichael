@@ -11,7 +11,7 @@ import {
   TwitterIcon,
 } from '@/components/SocialIcons';
 
-import portraitImage from '@/images/portrait.jpg';
+import portraitImage from '@/images/IMG_7290.jpg';
 
 function SocialLink({ className, href, children, icon: Icon }) {
   return (
@@ -19,6 +19,8 @@ function SocialLink({ className, href, children, icon: Icon }) {
       <Link
         href={href}
         className='group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500'
+        target='_blank'
+        rel='noopener noreferrer'
       >
         <Icon className='h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500' />
         <span className='ml-4'>{children}</span>
@@ -57,6 +59,9 @@ export default function About() {
                 alt=''
                 sizes='(min-width: 1024px) 32rem, 20rem'
                 className='aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800'
+                style={{
+                  objectPosition: '0px -140px',
+                }}
               />
             </div>
           </div>
