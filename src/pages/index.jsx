@@ -252,11 +252,15 @@ export default function Home({ articles }) {
     <>
       <Head>
         <title>
-          Michael Aubry - Software designer, founder, and amateur astronaut
+          Michael Aubry - I’m a software designer and entrepreneur based in San
+          Diego
         </title>
         <meta
           name='description'
-          content='I’m Michael, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms.'
+          content='I’m Michael, a software designer and entrepreneur based in San
+          Diego. I’m the founder of Motionbox, where we develop video sales
+          solutions that empower teams to sell more stuff, faster. Follow me
+          on social and join my newsletter 👇'
         />
       </Head>
       <Container className='mt-9'>
