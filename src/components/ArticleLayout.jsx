@@ -6,6 +6,8 @@ import { formatDate } from '@/lib/formatDate';
 import { Container } from '@/components/Container';
 import { Prose } from '@/components/Prose';
 
+import { Newsletter } from '../pages';
+
 function ArrowLeftIcon(props) {
   return (
     <svg viewBox='0 0 16 16' fill='none' aria-hidden='true' {...props}>
@@ -65,6 +67,9 @@ export function ArticleLayout({
               </header>
               <Prose className='mt-8'>{children}</Prose>
             </article>
+            <div className='mt-16'>
+              <Newsletter />
+            </div>
           </div>
         </div>
       </Container>

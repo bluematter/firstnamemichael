@@ -102,7 +102,7 @@ function SocialLink({ icon: Icon, ...props }) {
   );
 }
 
-function Newsletter() {
+export function Newsletter() {
   return (
     <form
       action='/thank-you'
@@ -270,9 +270,17 @@ export default function Home({ articles }) {
           </h1>
           <p className='mt-6 text-base text-zinc-600 dark:text-zinc-400'>
             I’m Michael, a software designer and entrepreneur based in San
-            Diego. I’m the founder of Motionbox, where we develop video sales
-            solutions that empower teams to sell more stuff, faster. Follow me
-            on social and join my newsletter 👇
+            Diego. I’m the founder of{' '}
+            <a
+              className='text-blue-600'
+              href='https://motionbox.io'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Motionbox
+            </a>
+            , where we develop video editing tools that empower teams to sell
+            more stuff. Follow me on social and join my newsletter 👇
           </p>
           <div className='mt-6 flex gap-6'>
             <SocialLink
