@@ -2,6 +2,7 @@ import { ArticleLayout } from '@/components/ArticleLayout';
 import Image from 'next/image';
 import designSystem from './planetaria-design-system.png';
 import ogExample from './open-graph-example.png';
+import ppOg from './puppeteer-og.png';
 
 export const meta = {
   author: 'Michael Aubry',
@@ -242,8 +243,6 @@ The app should be served up on port :8080, so if you invoke the url, it should b
 
 First thing I want to setup is our canvas size. After a quick Google search I can see the common open graph image size is **1200 x 630** pixels.
 
-So lets setup our document to be **1200 x 630**. Here is how we can do that in the following.
-
 ```ts
 interface IHTML {}
 
@@ -310,3 +309,154 @@ For this tutorial I am going to keep it simple. The main criteria I have are the
 - Possibly a component that holds meta data like avatar, username, date, etc
 
 <Image class='border' src={ogExample} alt='open graph image example' />
+
+Lets add a few basic styles, nothing too fancy for this demo, I will let you style it however you want.
+
+```CSS
+body {
+  width: 1200px;
+  height: 630px;
+  overflow: hidden;
+  background: #2362bd;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  border: 10px solid;
+}
+```
+
+Then I added an `H1` element inside the `#root` node. Something like this.
+
+```html
+<div id="root">
+  <h1>OG MAKER</h1>
+</div>
+```
+
+When booting up puppeteer locally in headfull mode, you should see something like this. Not the most pretty open graph image in the world, but it's a great foundation.
+
+<Image
+  class='border'
+  src={ppOg}
+  alt='example of open graph image inside puppeteer'
+/>
+
+## Adding dynamic text
+
+For this tutorial I am going to skip out on adding dynamic images and colors. We could turn this into a service and offer templates, and lots of custom options. I will show you the basics of inserting dynamic variables and that should be enough to get you going if you wanted to add more options.
+
+Most software is I/O (input and output) so the important thing to keep in mind here when adding dynamic properties is to think about where the input will be coming from.
+
+Since we are invoking this function over HTTP, we have the ability to pass in data to our `req` request handler. This is the perfect place to add an input variable to our API.
+
+Inside of `/src/index.ts` within our function we want to add a `req.body` property called `title` that we can use to pass into our HTML document.
+
+```ts
+const { title }: any = req.body;
+```
+
+The full function looks like this
+
+```ts
+import { HttpFunction } from '@google-cloud/functions-framework';
+import puppeteer from 'puppeteer';
+import generateHTML from './html';
+
+export const ogmaker: HttpFunction = async (req, res) => {
+  try {
+    // we are reading title inside the request body here
+    const { title }: any = req.body;
+
+    const browser = await puppeteer.launch({
+      headless: false,
+    });
+    const page = await browser.newPage();
+
+    // we are passing the title into our function here
+    await page.setContent(
+      generateHTML({
+        title,
+      })
+    );
+    await page.waitForSelector('.ready');
+
+    res.status(200).send({
+      works: true,
+    });
+  } catch (e: any) {
+    console.log({
+      e,
+    });
+  }
+};
+```
+
+Then going back to our HTML code, you can see we add title to our interface and make it an optional prop. The reason for that is because there is no guarantee that the function will be invoked with title in the request body.
+
+We could throw an error if title is not supplied, but in this case I'd rather let the code run and use a back up title in case one is not supplied.
+
+```ts
+interface IHTML {
+  title?: string;
+}
+
+export default ({ title }: IHTML) => {
+  return `
+    <html>
+      <head>
+        <meta charset="UTF-8" />
+        <script>
+        </script>
+        <style>
+          * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+          }
+
+          body {
+            width: 1200px;
+            height: 630px;
+            overflow: hidden;
+            background: #2362bd;
+          }
+
+          #root {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            border: 10px solid;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="root">
+          <h1>${title ? title : 'No title provided'}</h1>
+        </div>
+        <script>
+          const onReady = async () => {
+            // Ready begin rendering
+            const div = document.createElement('div')
+            div.className = 'ready'
+            document.body.appendChild(div)
+          };
+          document.addEventListener("DOMContentLoaded", onReady);
+        </script>
+      </body>
+    </html>
+  `;
+};
+```
