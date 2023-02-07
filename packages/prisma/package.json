@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "postinstall": "prisma generate",
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only api/index",
+    "start": "ts-node api/index",
+    "vercel-build": "prisma generate",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "DATABASE_URL=\"$MIGRATE_DATABASE_URL\" prisma migrate deploy"
+  },
   "devDependencies": {
     "@pothos/core": "^3.24.1",
     "@pothos/plugin-prisma": "^3.40.2",

@@ -1,20 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ApolloServer } from 'apollo-server-micro';
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { schema } from "./schema";
+import { createContext } from "./context";
 
-import { createContext } from './context';
-import { schema } from './schema';
-
-const apolloServer = new ApolloServer({
+const server = new ApolloServer({
   schema,
-  context: createContext,
 });
 
-export const config = {
-  api: {
-    bodyParser: false,
+startStandaloneServer(server, {
+  listen: {
+    port: 3001,
   },
-};
-
-export default apolloServer.createHandler({
-  path: '/api/graphql',
+  context: createContext,
+}).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
 });

@@ -1,13 +1,13 @@
-import SchemaBuilder from '@pothos/core';
-import PrismaPlugin from '@pothos/plugin-prisma';
-import SimpleObjectsPlugin from '@pothos/plugin-simple-objects';
-import { DateTimeResolver, JSONResolver } from 'graphql-scalars';
+import SchemaBuilder from "@pothos/core";
+import PrismaPlugin from "@pothos/plugin-prisma";
+import SimpleObjectsPlugin from "@pothos/plugin-simple-objects";
+import { DateTimeResolver, JSONResolver } from "graphql-scalars";
 
-import models from './models';
-import mutations from './mutations';
-import db from './prisma';
-import queries from './queries';
-import type PrismaTypes from '../../../prisma/generated';
+import models from "./models";
+import mutations from "./mutations";
+import db from "./prisma";
+import queries from "./queries";
+import type PrismaTypes from "../prisma/generated";
 
 interface ISchema {
   PrismaTypes: PrismaTypes;
@@ -44,7 +44,7 @@ queries(db, builder);
 mutations(db, builder);
 
 // not really sure yet
-builder.addScalarType('Json', JSONResolver, {});
-builder.addScalarType('DateTime', DateTimeResolver, {});
+builder.addScalarType("Json", JSONResolver, {});
+builder.addScalarType("DateTime", DateTimeResolver, {});
 
 export const schema = builder.toSchema({});

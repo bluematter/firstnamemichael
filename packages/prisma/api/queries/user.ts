@@ -1,11 +1,11 @@
-import { IBuilder } from '../schema';
-import { PrismaClient } from '../../../../prisma/client';
+import { IBuilder } from "../schema";
+import { PrismaClient } from "../../prisma/client";
 
 const userQuery = (db: PrismaClient, builder: IBuilder) => {
   // User
-  builder.queryField('user', (t) =>
+  builder.queryField("user", (t) =>
     t.prismaField({
-      type: 'User',
+      type: "User",
       nullable: true,
       args: {
         email: t.arg.string({ required: true }),
