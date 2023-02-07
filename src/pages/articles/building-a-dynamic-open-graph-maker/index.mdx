@@ -3,6 +3,7 @@ import Image from 'next/image';
 import designSystem from './planetaria-design-system.png';
 import ogExample from './open-graph-example.png';
 import ppOg from './puppeteer-og.png';
+import postmanImage from './postman.png';
 
 export const meta = {
   author: 'Michael Aubry',
@@ -23,7 +24,7 @@ Today I am going to show you how to code an open graph image maker tool that wil
 
 ## Tools we will be using
 
-Before we get started here is a high level overview of all the tools we will be using.
+Before we get started here is a high level overview of all the tools we will be using. All of the code from this tutorial can be found on GitHub.
 
 - Node.js 16+
 - Google Cloud Functions
@@ -460,3 +461,196 @@ export default ({ title }: IHTML) => {
   `;
 };
 ```
+
+If you use Postman and send a POST request using x-www-form-urlencoded and insert `title` as a key and whatever dynamic string you want to appear in your open graph image as the value, then press send, you should see puppeteer boot up with your dynamic request.
+
+<Image src={postmanImage} alt='example request using postman' />
+
+## Taking the screenshot
+
+The final thing I want to do in this tutorial to wrap up our feature is get the binary data of the pixels, i.e a screen shot of the element as a .jpg file or .png file.
+
+With Puppeteer this is fairly easy, so let's crack right into it, we are almost done with v1.
+
+```ts
+import { HttpFunction } from '@google-cloud/functions-framework';
+import puppeteer from 'puppeteer';
+import generateHTML from './html';
+
+export const ogmaker: HttpFunction = async (req, res) => {
+  try {
+    const { title }: any = req.body;
+
+    const browser = await puppeteer.launch({
+      headless: false,
+    });
+    const page = await browser.newPage();
+
+    await page.setContent(
+      generateHTML({
+        title,
+      })
+    );
+    await page.waitForSelector('.ready');
+
+    // screenshot
+    const pageFrame = page.mainFrame();
+    const rootHandle = await pageFrame.$('#root');
+
+    if (rootHandle) {
+      const screenshot: string | void | Buffer = await rootHandle.screenshot({
+        encoding: 'base64',
+        omitBackground: true,
+        type: 'jpeg',
+        quality: 100,
+        captureBeyondViewport: false,
+      });
+
+      if (typeof screenshot === 'string') {
+        // we can take this buffer and upload it to GCP if we would like to
+        const screenshotBuffer = await Buffer.from(screenshot, 'base64');
+      } else {
+        throw new Error('Screenshot is not a string');
+      }
+    } else {
+      throw new Error('No root element found');
+    }
+
+    res.status(200).send({
+      works: true,
+    });
+  } catch (e: any) {
+    res.status(500).send({
+      error: e.message,
+    });
+  }
+};
+```
+
+Now we have a `Buffer` that we can use to send to a Google Bucket or AWS S3 Bucket. Right here in this line `const screenshotBuffer = await Buffer.from(screenshot, 'base64')` is where the magic is.
+
+## Uploading to the Cloud
+
+For this tutorial and codebase I will be using Google Cloud Buckets. I just setup a bucket on my account, go ahead and do the same. If you need help with that feel free to reach out to me, or preferably spend a few minutes Googling how to do that.
+
+We are going to use the `@google-cloud/storage` Node.js SDK. So let's install it.
+
+```shell
+yarn add @google-cloud/storage
+```
+
+Now that we have the package, lets start writing the code to take our buffer data and have it send it to our bucket.
+
+To keep our code modular and easier to read/work with, I am going to create a file called `upload.ts` within the `src` folder. The code will look like this.
+
+```ts
+import { Storage } from '@google-cloud/storage';
+
+interface IUpload {
+  buffer: Buffer;
+}
+
+const storage = new Storage();
+
+export default async ({ buffer }: IUpload) => {
+  const bucket = storage.bucket('YOUR_BUCKET_NAME_HERE');
+  const file = bucket.file('test.jpg');
+
+  // Uploads the file.
+  return await file.save(buffer);
+};
+```
+
+There is one minor improvement we can make. Right now we are hardcoding the file name to `test.jpg`, this is no good if we want to scale this function. We have two options, and can choose either option or choose to combine both options into one.
+
+The first option is to pass in a file name or ID via the client and use that as our ID. This gives us more control, and we can use slugs etc as our ID.
+
+The other option is to generate a unique ID using UUID.
+
+We can also combine both options and look for an ID param in the `req.body` and if it exists we will use it. If it does not exist, we can default to UUID. I actually like this option better, it's more resilient and configurable. Lets build it!
+
+```ts
+interface IUpload {
+  buffer: Buffer;
+  fileName?: string; // Lets add this to our interface & make it optional
+}
+```
+
+Now on line 12 we can write a ternary
+
+```ts
+const file = bucket.file(fileName ? fileName : 'test.jpg');
+```
+
+Lets make sure to read this in our `req.body` within our `index.ts` file.
+
+```ts
+const { title, fileName }: any = req.body;
+```
+
+Then we must pass that argument into our `upload` function like this
+
+```ts
+await upload({
+  buffer: screenshotBuffer,
+  fileName,
+});
+```
+
+Great, but we know this variable can be `undefined` and in that case we want to use a library called `uuid` to uniquely generate an ID for us. Lets install it!
+
+```shell
+yarn add uuid && yarn add -D @types/uuid
+```
+
+Then lets use it in the place of `test.jpg` like this
+
+```ts
+import { Storage } from '@google-cloud/storage';
+import { v1 as uuid } from 'uuid';
+
+interface IUpload {
+  buffer: Buffer;
+  fileName?: string;
+}
+
+const storage = new Storage();
+
+export default async ({ buffer, fileName }: IUpload) => {
+  const fName = fileName ? fileName : uuid() + '.jpg';
+  const bucket = storage.bucket('motionbox-og-images');
+  const file = bucket.file(fName);
+
+  // lets return the file name if its uniquely generated so we can have reference on the client
+  return {
+    fName,
+    uploaded: await file.save(buffer),
+  };
+};
+```
+
+Then in our `index.ts` file we can send back the file name to the client in the case it is uniquely generated, this is important to maintain reference to where the file is located, in the case you want to save it in a database or render it on the screen upon a response.
+
+```ts
+const uploadedFile = await upload({
+  buffer: screenshotBuffer,
+});
+
+res.status(200).send({
+  created: true,
+  uploadedFile,
+});
+```
+
+After sending your request you should get a response similar to this
+
+```json
+{
+  "created": true,
+  "uploadedFile": {
+    "fName": "eb54f610-a67d-11ed-a4e2-bda12d775f34.jpg"
+  }
+}
+```
+
+## Deploying and wrapping up
