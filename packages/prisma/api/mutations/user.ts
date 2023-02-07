@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import postmark from "postmark";
 
 import { IBuilder } from "../schema";
 import { PrismaClient } from "../../prisma/client";
+
+const postmark = require("postmark");
+const client = new postmark.ServerClient(process.env.POSTMARK_TOKEN);
 
 const userMutation = (db: PrismaClient, builder: IBuilder) => {
   builder.mutationField("createUser", (t) =>
@@ -13,10 +15,6 @@ const userMutation = (db: PrismaClient, builder: IBuilder) => {
       },
       resolve: async (query, root, { email }) => {
         try {
-          const client = new postmark.ServerClient(
-            "3aa81f8d-6f8b-4279-aa9c-51bd473a1fee"
-          );
-
           client.sendEmailWithTemplate({
             From: "michael@michaelaubry.com",
             To: email,
@@ -24,9 +22,9 @@ const userMutation = (db: PrismaClient, builder: IBuilder) => {
             TemplateModel: {
               product_url: "michaelaubry.com",
               product_name: "Michael Aubry",
-              action_url: "action_url_Value",
+              action_url: "some confirmation url",
               company_name: "Michael Aubry",
-              company_address: "company_address_Value",
+              company_address: "",
               name: "Michael Aubry",
               invite_sender_name: "Michael Aubry",
               invite_sender_organization_name: "Michael Aubry",

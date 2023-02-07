@@ -16,6 +16,7 @@
     "@pothos/plugin-prisma": "^3.40.2",
     "@pothos/plugin-simple-objects": "^3.6.7",
     "@types/node": "^18.11.19",
+    "dotenv": "^16.0.3",
     "graphql-scalars": "^1.20.1",
     "prisma": "^4.9.0",
     "ts-node": "^10.9.1",

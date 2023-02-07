@@ -29,7 +29,9 @@ export default function Newsletter({ minimal }: INewsletterProps) {
 
     try {
       const data = await request(
-        'https://michaelaubry-prisma.vercel.app/api',
+        process.env.NODE_ENV === 'development'
+          ? 'http://localhost:3001/api'
+          : 'https://michaelaubry-prisma.vercel.app/api',
         CREATE_USER,
         {
           email,
