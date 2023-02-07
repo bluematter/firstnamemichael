@@ -4,7 +4,7 @@ import remarkGfm from 'remark-gfm';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'mdx'],
+  pageExtensions: ['tsx', 'js', 'jsx', 'mdx'],
   experimental: {
     scrollRestoration: true,
   },

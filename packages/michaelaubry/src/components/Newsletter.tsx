@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { gql, request } from 'graphql-request';
 import { SyntheticEvent, useState } from 'react';
 
@@ -12,7 +13,11 @@ const CREATE_USER = gql`
   }
 `;
 
-export default function Newsletter() {
+interface INewsletterProps {
+  minimal?: boolean;
+}
+
+export default function Newsletter({ minimal }: INewsletterProps) {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
@@ -24,7 +29,7 @@ export default function Newsletter() {
 
     try {
       const data = await request(
-        'https://sendsmiles-prisma.vercel.app/api',
+        'https://michaelaubry-prisma.vercel.app/api',
         CREATE_USER,
         {
           email,
@@ -45,43 +50,51 @@ export default function Newsletter() {
   return (
     <>
       <form
-        className='sticky top-0 rounded-2xl  border border-zinc-100 p-6 dark:border-zinc-700/40'
+        className={clsx(
+          !minimal &&
+            'rounded-2xl  border border-zinc-100 p-6 dark:border-zinc-700/40',
+          'sticky top-0'
+        )}
         onSubmit={handleSubmit}
       >
-        <h2 className='flex text-sm font-semibold text-zinc-900 dark:text-zinc-100'>
-          <MailIcon className='h-6 w-6 flex-none' />
-          <span className='ml-3'>Stay up to date</span>
-        </h2>
+        {!minimal && (
+          <h2 className='flex text-sm font-semibold text-zinc-900 dark:text-zinc-100'>
+            <MailIcon className='h-6 w-6 flex-none' />
+            <span className='ml-3'>Stay up to date</span>
+          </h2>
+        )}
         <p className='mt-2 text-sm text-zinc-600 dark:text-zinc-400'>
-          Get notified when I publish something new, and unsubscribe at any
-          time.
+          Get notified when I publish something new -- unsubscribe at any time.
         </p>
-        <div className='mt-6 flex'>
+        <div className='mt-4 flex'>
           <input
             type='email'
             placeholder='Email address'
             aria-label='Email address'
             required
+            name='email'
             className='min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm'
           />
           <Button type='submit' className='ml-4 flex-none'>
             Join
           </Button>
         </div>
+        {error ? (
+          <p className='mt-2 text-red-600'>There was an error</p>
+        ) : (
+          <>
+            {success ? (
+              <p className='mt-2 text-teal-500'>
+                Thanks for joining, check your inbox!
+              </p>
+            ) : (
+              <p className='mt-3 text-sm italic text-gray-500 dark:text-gray-100'>
+                Join the family!
+              </p>
+            )}
+          </>
+        )}
       </form>
-      {error ? (
-        <p className='mt-2 text-red-600'>There was an error</p>
-      ) : (
-        <>
-          {success ? (
-            <p className='mt-2 text-teal-500'>
-              Thanks for joining, check your inbox!
-            </p>
-          ) : (
-            <p className='mt-2 text-sm text-gray-600'>Join the family!</p>
-          )}
-        </>
-      )}
     </>
   );
 }
