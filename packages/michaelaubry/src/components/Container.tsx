@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 
 const OuterContainer = forwardRef(function OuterContainer(
-  { className, children, ...props },
+  { className, children, ...props }: any,
   ref
 ) {
   return (
@@ -12,8 +13,8 @@ const OuterContainer = forwardRef(function OuterContainer(
   );
 });
 
-const InnerContainer = forwardRef(function InnerContainer(
-  { className, children, ...props },
+const InnerContainer: any = forwardRef(function InnerContainer(
+  { className, children, ...props }: any,
   ref
 ) {
   return (
@@ -27,8 +28,8 @@ const InnerContainer = forwardRef(function InnerContainer(
   );
 });
 
-export const Container = forwardRef(function Container(
-  { children, ...props },
+export const Container: any = forwardRef(function Container(
+  { children, ...props }: any,
   ref
 ) {
   return (

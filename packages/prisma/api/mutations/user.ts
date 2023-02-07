@@ -22,7 +22,7 @@ const userMutation = (db: PrismaClient, builder: IBuilder) => {
             TemplateModel: {
               product_url: "michaelaubry.com",
               product_name: "Michael Aubry",
-              action_url: "some confirmation url",
+              action_url: `https://michaelaubry.com/confirm?email=${email}`,
               company_name: "Michael Aubry",
               company_address: "",
               name: "Michael Aubry",
@@ -37,6 +37,29 @@ const userMutation = (db: PrismaClient, builder: IBuilder) => {
           return db.user.create({
             data: {
               email,
+            },
+          });
+        } catch (e: any) {
+          throw new Error(e.message);
+        }
+      },
+    })
+  );
+
+  builder.mutationField("confirmUser", (t) =>
+    t.prismaField({
+      type: "User",
+      args: {
+        email: t.arg.string({ required: true }),
+      },
+      resolve: async (query, root, { email }) => {
+        try {
+          return db.user.update({
+            where: {
+              email,
+            },
+            data: {
+              confirmed: true,
             },
           });
         } catch (e: any) {

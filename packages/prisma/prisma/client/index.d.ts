@@ -20,6 +20,7 @@ export type User = {
   id: string
   name: string | null
   email: string
+  confirmed: boolean
 }
 
 
@@ -810,18 +811,21 @@ export namespace Prisma {
     id: string | null
     name: string | null
     email: string | null
+    confirmed: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
     name: string | null
     email: string | null
+    confirmed: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     name: number
     email: number
+    confirmed: number
     _all: number
   }
 
@@ -830,18 +834,21 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
+    confirmed?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     name?: true
     email?: true
+    confirmed?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     name?: true
     email?: true
+    confirmed?: true
     _all?: true
   }
 
@@ -922,6 +929,7 @@ export namespace Prisma {
     id: string
     name: string | null
     email: string
+    confirmed: boolean
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -945,6 +953,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    confirmed?: boolean
   }
 
 
@@ -1699,7 +1708,8 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    email: 'email'
+    email: 'email',
+    confirmed: 'confirmed'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1717,12 +1727,14 @@ export namespace Prisma {
     id?: StringFilter | string
     name?: StringNullableFilter | string | null
     email?: StringFilter | string
+    confirmed?: BoolFilter | boolean
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    confirmed?: SortOrder
   }
 
   export type UserWhereUniqueInput = {
@@ -1734,6 +1746,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    confirmed?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -1746,48 +1759,56 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter | string
     name?: StringNullableWithAggregatesFilter | string | null
     email?: StringWithAggregatesFilter | string
+    confirmed?: BoolWithAggregatesFilter | boolean
   }
 
   export type UserCreateInput = {
     id?: string
     name?: string | null
     email: string
+    confirmed?: boolean
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
     name?: string | null
     email: string
+    confirmed?: boolean
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    confirmed?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    confirmed?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserCreateManyInput = {
     id?: string
     name?: string | null
     email: string
+    confirmed?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    confirmed?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
+    confirmed?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type StringFilter = {
@@ -1820,22 +1841,30 @@ export namespace Prisma {
     not?: NestedStringNullableFilter | string | null
   }
 
+  export type BoolFilter = {
+    equals?: boolean
+    not?: NestedBoolFilter | boolean
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    confirmed?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    confirmed?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    confirmed?: SortOrder
   }
 
   export type StringWithAggregatesFilter = {
@@ -1874,12 +1903,24 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter
   }
 
+  export type BoolWithAggregatesFilter = {
+    equals?: boolean
+    not?: NestedBoolWithAggregatesFilter | boolean
+    _count?: NestedIntFilter
+    _min?: NestedBoolFilter
+    _max?: NestedBoolFilter
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type NestedStringFilter = {
@@ -1908,6 +1949,11 @@ export namespace Prisma {
     startsWith?: string
     endsWith?: string
     not?: NestedStringNullableFilter | string | null
+  }
+
+  export type NestedBoolFilter = {
+    equals?: boolean
+    not?: NestedBoolFilter | boolean
   }
 
   export type NestedStringWithAggregatesFilter = {
@@ -1964,6 +2010,14 @@ export namespace Prisma {
     gt?: number
     gte?: number
     not?: NestedIntNullableFilter | number | null
+  }
+
+  export type NestedBoolWithAggregatesFilter = {
+    equals?: boolean
+    not?: NestedBoolWithAggregatesFilter | boolean
+    _count?: NestedIntFilter
+    _min?: NestedBoolFilter
+    _max?: NestedBoolFilter
   }
 
 
