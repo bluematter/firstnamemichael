@@ -4,7 +4,7 @@
         <title>Spencer Sharp</title>
         <link>undefined</link>
         <description>Your blog description</description>
-        <lastBuildDate>Tue, 07 Feb 2023 03:58:19 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 07 Feb 2023 05:37:56 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
@@ -22,7 +22,7 @@
             <content:encoded><![CDATA[<p>An important feature for the new <a href="https://motionbox.io" target="_blank" rel="noopener noreferrer">Motionbox</a> is to have beautiful looking og:image (open graph image). If you want to learn more about open graph images here is a link <a href="https://ogp.me/" target="_blank" rel="noopener noreferrer">ogp.me</a>.</p>
 <p>Open graph images are important when sharing links on social media sites. They give your link context and act as a good marketing tool because of their visual nature. You can add graphics so good that your viewers have no choice but to click on them.</p>
 <p>Today I am going to show you how to code an open graph image maker tool that will take some dynamic data and render an image on the fly using Node.js and serverless functions.</p>
-<img class="hidden" alt="" srcSet="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fplanetaria-design-system.d4cfce90.png&amp;w=1920&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fplanetaria-design-system.d4cfce90.png&amp;w=3840&amp;q=75 2x" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fplanetaria-design-system.d4cfce90.png&amp;w=3840&amp;q=75" width="1310" height="872" decoding="async" data-nimg="1" loading="lazy" style="color:transparent"/>
+<img alt="" srcSet="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fplanetaria-design-system.d4cfce90.png&amp;w=1920&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fplanetaria-design-system.d4cfce90.png&amp;w=3840&amp;q=75 2x" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fplanetaria-design-system.d4cfce90.png&amp;w=3840&amp;q=75" width="1310" height="872" decoding="async" data-nimg="1" class="hidden" loading="lazy" style="color:transparent"/>
 <h2>Tools we will be using</h2>
 <p>Before we get started here is a high level overview of all the tools we will be using. All of the code from this tutorial can be found on GitHub.</p>
 <ul>
@@ -233,7 +233,7 @@ URL: http://localhost:8080/
 <li>A nice border around the image</li>
 <li>Possibly a component that holds meta data like avatar, username, date, etc</li>
 </ul>
-<img class="border" alt="open graph image example" srcSet="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fopen-graph-example.43de6f4d.png&amp;w=1200&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fopen-graph-example.43de6f4d.png&amp;w=3840&amp;q=75 2x" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fopen-graph-example.43de6f4d.png&amp;w=3840&amp;q=75" width="1200" height="630" decoding="async" data-nimg="1" loading="lazy" style="color:transparent"/>
+<img alt="open graph image example" srcSet="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fopen-graph-example.43de6f4d.png&amp;w=1200&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fopen-graph-example.43de6f4d.png&amp;w=3840&amp;q=75 2x" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fopen-graph-example.43de6f4d.png&amp;w=3840&amp;q=75" width="1200" height="630" decoding="async" data-nimg="1" class="border" loading="lazy" style="color:transparent"/>
 <p>Lets add a few basic styles, nothing too fancy for this demo, I will let you style it however you want.</p>
 <pre class="language-css"><code class="language-CSS"><span class="token selector">body</span> <span class="token punctuation">{</span>
   <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">1200</span><span class="token unit">px</span><span class="token punctuation">;</span>
@@ -260,7 +260,7 @@ URL: http://localhost:8080/
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
 </code></pre>
 <p>When booting up puppeteer locally in headfull mode, you should see something like this. Not the most pretty open graph image in the world, but it&#x27;s a great foundation.</p>
-<img class="border" alt="example of open graph image inside puppeteer" srcSet="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpuppeteer-og.27213735.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpuppeteer-og.27213735.png&amp;w=1920&amp;q=75 2x" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpuppeteer-og.27213735.png&amp;w=1920&amp;q=75" width="672" height="373" decoding="async" data-nimg="1" loading="lazy" style="color:transparent"/>
+<img alt="example of open graph image inside puppeteer" srcSet="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpuppeteer-og.27213735.png&amp;w=750&amp;q=75 1x, /_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpuppeteer-og.27213735.png&amp;w=1920&amp;q=75 2x" src="/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpuppeteer-og.27213735.png&amp;w=1920&amp;q=75" width="672" height="373" decoding="async" data-nimg="1" class="border" loading="lazy" style="color:transparent"/>
 <h2>Adding dynamic text</h2>
 <p>For this tutorial I am going to skip out on adding dynamic images and colors. We could turn this into a service and offer templates, and lots of custom options. I will show you the basics of inserting dynamic variables and that should be enough to get you going if you wanted to add more options.</p>
 <p>Most software is I/O (input and output) so the important thing to keep in mind here when adding dynamic properties is to think about where the input will be coming from.</p>
