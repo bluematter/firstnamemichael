@@ -77,8 +77,10 @@ yarn add -D typescript
 yarn add @google-cloud/functions-framework
 ```
 
+We need to use puppeteer v18.0.0, I wasn't able to get v19+ to work on GCP, I would test for yourself, maybe there will be a patch after this writing. As of this writing v18.0.0 works well.
+
 ```shell
-yarn add puppeteer
+yarn add puppeteer@18.0.0
 ```
 
 ## Creating our function
@@ -653,4 +655,27 @@ After sending your request you should get a response similar to this
 }
 ```
 
-## Deploying and wrapping up
+## Deploying
+
+The final thing that we need to setup in order to deploy our function properly to GCP is a tiny little script command that will compile our TypeScript code and deploy for us.
+
+Open your `package.json` file and add this new script key value pair. We already have the `start` script, we are now adding `deploy`.
+
+```json
+"scripts": {
+  "start": "npx tsc && npx functions-framework --target=ogmaker --allow-unauthenticated",
+  "deploy": "npx tsc && gcloud functions deploy ogmaker --gen2 --runtime=nodejs16 --region=us-central1 --source=. --entry-point=ogmaker --trigger-http --allow-unauthenticated --timeout=600 --memory=2GiB"
+},
+```
+
+Before you can actually use the `gcloud` command you need to install it on your system and configure it. Here is a link to installation instructions for installing `gcloud` on your system <a href='https://cloud.google.com/sdk/docs/install' target='_blank' rel='noopener noreferrer'>cloud.google.com/sdk/docs/install</a>
+
+Lastly, feel free to adjust the parameters of the `deploy` command you can adjust `--runtime` to use a different version of node.js. You can change your `--region`, `--timeout`, and `--memory` settings.
+
+## Final thoughts
+
+I hope this was insightful, and again all this code is hosted on GitHub under this repo <a href='https://github.com/bluematter/ogmaker' target='_blank' rel='noopener noreferrer'>github.com/bluematter/ogmaker</a>. If you have any suggestions on making this better, or would like to fork and have your own copy, please feel free to do so.
+
+If you enjoyed this and want more, sign up to the newsletter where I will keep you in the loop.
+
+I'm going to turn this code into a micro SaaS product and write another follow up post around how I will turn it into a product and market it. Subscribe if you want me to email you when that post is ready! 👇 enter your email for the updates, no spam, unsubscribe at any time.
