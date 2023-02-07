@@ -21,7 +21,7 @@ export default function Confirm() {
     (async () => {
       const email = router.query.email;
 
-      const data = await request(
+      await request(
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:3001/api'
           : 'https://michaelaubry-prisma.vercel.app/api',
@@ -31,9 +31,9 @@ export default function Confirm() {
         }
       );
 
-      console.log('User confirmed', {
-        data,
-      });
+      // console.log('User confirmed', {
+      //   data,
+      // });
     })();
   }, [router]);
 
