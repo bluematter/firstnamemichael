@@ -220,7 +220,7 @@ export default function Home({ articles }) {
             I’m Michael, a software designer and entrepreneur based in San
             Diego. I’m the founder of{' '}
             <a
-              className='text-blue-600'
+              className='font-medium italic text-teal-500'
               href='https://motionbox.io'
               target='_blank'
               rel='noopener noreferrer'
@@ -230,7 +230,7 @@ export default function Home({ articles }) {
             , where we develop video editing tools that empower teams to sell
             more stuff. Follow me on social and join my newsletter 👇
           </p>
-          <div className='mt-6 flex gap-6'>
+          <div className='mt-6 flex gap-2'>
             <SocialLink
               href='https://twitter.com/michaelaubry'
               aria-label='Follow on Twitter'

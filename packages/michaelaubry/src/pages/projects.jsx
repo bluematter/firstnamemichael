@@ -21,6 +21,13 @@ const projects = [
     link: { href: 'https://www.sendsmiles.co/', label: 'sendsmiles.co' },
     logo: logoAnimaginary,
   },
+  {
+    name: 'Quick Frame',
+    description:
+      'FREE Image mockup tool, paste a Twitter URL or upload an image and get a beautiful graphic in only a few seconds.',
+    link: { href: 'https://www.quickframe.co/', label: 'quickframe.co' },
+    logo: logoAnimaginary,
+  },
 ];
 
 function LinkIcon(props) {
@@ -46,7 +53,7 @@ export default function Projects() {
       </Head>
       <SimpleLayout
         title='Things I’ve made trying to put my dent in the universe.'
-        intro='I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved.'
+        intro='I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Some of them are free or have a free option. I love building things and adding value, if you have any ideas for projects I am always open to chatting, send me a DM.'
       >
         <ul
           role='list'

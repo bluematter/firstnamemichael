@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { gql, request } from 'graphql-request';
+import Image from 'next/image';
 import { SyntheticEvent, useState } from 'react';
 
 import { Button } from '@/components/Button';
@@ -51,6 +52,41 @@ export default function Newsletter({ minimal }: INewsletterProps) {
 
   return (
     <>
+      <div className='mb-4 flex'>
+        <div className='isolate flex -space-x-1 overflow-hidden'>
+          <Image
+            width={24}
+            height={24}
+            className='relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-zinc-900'
+            src='https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+            alt=''
+          />
+          <Image
+            width={24}
+            height={24}
+            className='relative z-20 inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-zinc-900'
+            src='https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+            alt=''
+          />
+          <Image
+            width={24}
+            height={24}
+            className='relative z-10 inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-zinc-900'
+            src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80'
+            alt=''
+          />
+          <Image
+            width={24}
+            height={24}
+            className='relative z-0 inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-zinc-900'
+            src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+            alt=''
+          />
+        </div>
+        <div className='ml-4 font-medium italic text-teal-500'>
+          Join 1000+ other subscribers
+        </div>
+      </div>
       <form
         className={clsx(
           !minimal &&
