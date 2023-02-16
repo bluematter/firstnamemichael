@@ -19,7 +19,7 @@ interface INewsletterProps {
 }
 
 export default function Newsletter({ minimal }: INewsletterProps) {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(null);
 
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
@@ -46,7 +46,11 @@ export default function Newsletter({ minimal }: INewsletterProps) {
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
-      setError(e);
+      if (e.message.includes('Email already exists')) {
+        setError('Email already exists');
+      } else {
+        setError('There was an error');
+      }
     }
   };
 
@@ -118,7 +122,16 @@ export default function Newsletter({ minimal }: INewsletterProps) {
           </Button>
         </div>
         {error ? (
-          <p className='mt-2 text-red-600'>There was an error</p>
+          <p
+            className={clsx(
+              error.includes('already exists')
+                ? 'text-teal-500'
+                : 'text-red-600',
+              'mt-2'
+            )}
+          >
+            {error}
+          </p>
         ) : (
           <>
             {success ? (

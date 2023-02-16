@@ -6,7 +6,7 @@
   "author": "bluematter <michael@motionbox.io>",
   "license": "MIT",
   "scripts": {
-    "upgrade": "cd packages/michaelaubry && yarn upgrade",
+    "upgrade:all": "cd packages/michaelaubry && yarn upgrade && cd ../prisma && yarn upgrade",
     "main": "cd packages/michaelaubry && yarn dev",
     "prisma": "cd packages/prisma && yarn dev",
     "start:dev": "concurrently \"yarn main\" \"yarn prisma\""

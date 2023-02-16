@@ -95,7 +95,7 @@ export default function About() {
               <p>
                 Today, I’m the founder of{' '}
                 <a
-                  className='text-blue-600'
+                  className='font-medium italic text-teal-500'
                   href='https://motionbox.io'
                   target='_blank'
                   rel='noopener noreferrer'

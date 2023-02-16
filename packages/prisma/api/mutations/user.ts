@@ -15,6 +15,12 @@ const userMutation = (db: PrismaClient, builder: IBuilder) => {
       },
       resolve: async (query, root, { email }) => {
         try {
+          const user = await db.user.create({
+            data: {
+              email,
+            },
+          });
+
           client.sendEmailWithTemplate({
             From: "michael@michaelaubry.com",
             To: email,
@@ -34,12 +40,12 @@ const userMutation = (db: PrismaClient, builder: IBuilder) => {
             },
           });
 
-          return db.user.create({
-            data: {
-              email,
-            },
-          });
+          return user;
         } catch (e: any) {
+          if (e.code === "P2002") {
+            throw new Error("Email already exists");
+          }
+
           throw new Error(e.message);
         }
       },
