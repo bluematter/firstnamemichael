@@ -21,7 +21,7 @@ const userMutation = (db: PrismaClient, builder: IBuilder) => {
             },
           });
 
-          client.sendEmailWithTemplate({
+          await client.sendEmailWithTemplate({
             From: "michael@michaelaubry.com",
             To: email,
             TemplateAlias: "newsletter-confirmation",
