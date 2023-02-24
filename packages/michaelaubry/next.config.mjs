@@ -18,7 +18,7 @@ const nextConfig = {
 
   // Uncoment to add domain whitelist
   images: {
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com', 'motionbox-public.b-cdn.net'],
   },
 
   // SVGR

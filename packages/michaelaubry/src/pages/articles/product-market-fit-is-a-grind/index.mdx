@@ -1,5 +1,6 @@
 import { ArticleLayout } from '@/components/ArticleLayout';
 import Image from 'next/image';
+import Head from 'next/head';
 
 export const meta = {
   author: 'Michael Aubry',
@@ -10,6 +11,23 @@ export const meta = {
 };
 
 export default (props) => <ArticleLayout meta={meta} {...props} />;
+
+<Head>
+  <meta
+    name='image'
+    content='https://motionbox-public.b-cdn.net/images/og/product-market-fit-is-a-grind.png'
+  />
+  <meta
+    name='twitter:image'
+    content='https://motionbox-public.b-cdn.net/images/og/product-market-fit-is-a-grind.png'
+  />
+</Head>
+
+<Image
+  width={1200}
+  height={630}
+  src='https://motionbox-public.b-cdn.net/images/og/product-market-fit-is-a-grind.png'
+/>
 
 Forget about coding, forget about having a brilliant "idea", focus on one thing and one thing only in the early days of building a company.
 
