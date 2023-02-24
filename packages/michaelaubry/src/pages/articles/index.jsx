@@ -44,6 +44,8 @@ export default function ArticlesIndex({ articles }) {
           name='description'
           content='All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order.'
         />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:site' content='@michaelaubry' />
       </Head>
       <SimpleLayout
         title='Writing on entrepreneurship, company building, and software.'
