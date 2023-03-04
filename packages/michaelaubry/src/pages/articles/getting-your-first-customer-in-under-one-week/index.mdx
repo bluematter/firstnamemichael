@@ -4,10 +4,10 @@ import Head from 'next/head';
 
 export const meta = {
   author: 'Michael Aubry',
-  date: '2023-02-23',
+  date: '2023-03-04',
   title: 'Getting your first customer in under one week',
   description:
-    'I have been working on a company for 3 years and am convienced product market fit is the first checkpoint you must hit.',
+    'Speed is your friend when starting a business. My first software it took me months/years to get the first customer. This time around I went from thought to customer in under one week. I will share my thoughts and some examples on how I did that.',
 };
 
 export default (props) => <ArticleLayout meta={meta} {...props} />;
@@ -27,56 +27,60 @@ export default (props) => <ArticleLayout meta={meta} {...props} />;
   />
 </Head>
 
+Most of the early days in your entrepreneurial journey will be spend paying ignorance debt. You don't know what you don't know, despite all the advice out there (which should save you time but you're still human).
+
+Much advice like this might not make sense, but if I could encourage one thing, that would be to fail fast, because you will fail.
+
+In this article I am going to explain how to quickly and cheaply get your first customer. I just did this the first week of March with my co founder, so I know this advice works.
+
+_Stripe payment below we got $100 from our first paying customer in our new product launch._
+
 <Image
-  width={1200}
-  height={630}
-  src='https://motionbox-public.b-cdn.net/images/og/product-market-fit-is-a-grind.png'
+  width={1284 / 4}
+  height={2778 / 4}
+  src='https://motionbox-public.b-cdn.net/images/blog/IMG_8213.PNG'
 />
 
-Forget about coding, forget about having a brilliant "idea", focus on one thing and one thing only in the early days of building a company.
+Lets crack into some practical steps and some thoughts to help breakdown how we did this.
 
-That thing is product market fit! Without it I've found you're doomed, product market fit leads to many essential factors for your business in the early days.
+## Do things manually
 
-Without it these are the things you will obtain
+It's as simple as the title suggests. Spend your mental energy focusing on the job that needs to be done. It will take time and effort to figure out what the end result for someone is. Think of it initially as a service (sort of). Some common services we all know (which are hard to scale) web design, marketing, and design.
 
-- lack of clarity and messaging
-- frusteration you cannot sell repetitvely
-- wasted product building cycles and time
+We are not making this a full fledge service to be clear, think of more specific tasks that are repetitive or cost money/time for a specific audience following a specific set of patterns (because we eventually want to scale, but early on are treating it like a service to get validation).
 
-## The solution is PMF
+For us it was rendering 100+ personalized videos, people are already using email tools that send multiple messages, people are heavily adopting video messaging. This is something we can leverage into a software, it eventually needs to be able to run on it's own with a UI.
 
-Forget about your idea, forget about writing code. The mistake I've made is falling in love with the coding process, it's artistic and gives you dopamine for completing tasks. You see your work come to life and it's great, but then no one pays for it and you stay poor.
+The natural thing to do for most beginners would be to start developing a software product, with a login, a database, git, deployment, they would spend time mocking up the UI, etc. This is dead wrong in most cases, remember software (in my view) is meant to be a scalable vehicle to get a user to a desired end outcome.
 
-But how do you get PMF without writing code? First thing I believe is important to understand is that code is a form of leverage on solving problems at scale which saves time and can be reused by infinite amounts of people.
+Lets focus on the end outcome first and deliver it, even if its manual labor, because this is all a customer cares about (the outcome). All we care about is <a href='https://www.michaelaubry.com/articles/product-market-fit-is-a-grind' target='_blank' rel='noopener noreferrer'>Product Market Fit</a> and running cheap experiments to validate there is demand via collecting payments.
 
-Once you understand that principle, then you know by writing your first line of code you have already over engineered the problem you're trying to solve for. The first and only problem you should be solving for is learning what the desired outcome for a particular individal is -- that's it, lets keep it simple.
+## Selling an outcome
 
-## Run cheap experiments
+If you set things up correctly, the job to be done should be able to be ran in some sort of a script (ideally on your local machine). You don't need a fancy server or even git.
 
-Coding is an expensive debt, each line of code (if written in the wrong direction) is a form of technical debt. Every hour you spend coding is a form of debt. To say the least, the less you're talking to customers and finding PMF the more debt you're inccuring.
+I would start by writing a Node.js script on your local machine, or a Python script, perhaps even a bash script depending on your skill level. If you don't know how to code you can hire an engineer to focus only on writing a script that gets the job done, keep it super simple early on.
 
-So I believe in order to maximise success you have to be lean with your approach in finding PMF. Here are some thoughts on how you can run cheap experiements.
+Do not spend too much time on this, manually figure out all the steps required to get the job done, then package it into the script and focus 80%+ of your time selling the solution. Use tools like Apollo.io, sales navigator, and get aggressive. If you send 1000 messages and the responses are dull, perhaps your offer isn't compelling enough.
 
-Our number one goal is to find the desired outcome. So when you reachout to people on the internet you can offer them a service, or ask them about a problem they have.
+If it's not getting praise, then you might not be on the right track with your solution, if this is the case, you can keep tweaking your messaging until you hit a bullseye. Thankfully you did not build a full fledge software after months of laboring away.
 
-From here if you know of an obvious solution to the problem you can do it in an unscalable way. Yes, manually fix the problem. Remeber software is designed to be leveraged problem solving, but under the hood there are functions that you can manually execute.
+## Collect payment
 
-## Earn your first customers manually
+After iteration and figuring out how the desired outcome looks like by getting some signals in the market from your conversations, you now have a better idea what to build. When you find someone who is truly hungry for your offer they will want it and it's your job to simply create a Stripe invoice page and collect payment.
 
-Something I am experimenting with is doing it this way, forget the coding, lets deliver the outcome to a group of users. We will get direct feedback and learn so much more before writing our first line of code this way. It's scary to go out and often times we go code because it's a comfort zone.
+If you're in a hot market there is no reason why you can't make a sale within 1-2 weeks with enough dedication. By having the payment you can confidently say that you have a good idea on what the job to be done is and what the avatar looks like.
 
-If you lead with this approach you can start making money right away. Have more than enough data to reverse engineer into product, and have a clear roadmap plus your target avatar is clear as well.
+## Deliver the goods
 
-You know you have a winner when the customer is asking for more of your deliverables, if they're like durg addicts and are coming back for more its time to invest in engineering.
+This is where we are at currently. I wrote a script that generates 100 personalized videos and am delivering it to our first customer. We will analyze the feedback and observe the customers avatar so that we can replicate this 10 more times.
 
-From here you can start clarifying your message to target thousands of others that fit within that target profile and they can onboard themselves.
+Eventually when we are super clear about the avatar, the offer, and desired outcome. It will be 10x easier to reverse engineer from there and develop a software that scales to 100-1000 customers.
 
 ## Final thoughts
 
-Product market fit should be the first thing you obsess over and unlock before anything else. Even if something seems obvious and in demand i.e you see competitors and you think you can copy I would avoid. The reason is you dont understand the core problem as well and you will waste time building product while they are making sales.
+Before this approach I spent 1 year building a product and 3 months after that I did not know who I was selling to. I was lost, and thankfully through enough desperation I finally got a customer 1.5 years in. However, I was still lost because I was focused on the product purely and not on the customer.
 
-Cut to the chase and start building relationships with people ASAP and start collecting money ASAP. Then invest in scalable solutions.
+That pain has lead me to this approach and within 1 week we got our first customer, understand the problem, and the avatar. Starting here makes the scaling process much easier and is built on a solid foundation.
 
-This is the way, but do take it with a grain of salt and think for yourself. I am a new entreprenuer and this is a fundamental thing I have learned the hard way three years in.
-
-If you found my thoughts and 2 cents valuable please subscribe to the newsletter where I drop tons of value weekly sharing my journey as a start up founder.
+If this helped you in away, then I am grateful I was able to make an impact and if you want more, please consider subscribing to the newsletter by adding your email below.
