@@ -32,7 +32,8 @@ export default function Newsletter({ minimal }: INewsletterProps) {
     try {
       setLoading(true);
 
-      const data = await request(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const data: any = await request(
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:3001/api'
           : 'https://michaelaubry-prisma.vercel.app/api',
