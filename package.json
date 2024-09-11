@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "prisma generate --no-engine && prisma migrate deploy && next build",
+    "build": "next build",
     "build:embed": "npx postcss embeds/styles/tailwind.css -o embeds/styles/tailwind.min.css && webpack --config webpack.embed.config.js",
     "build:bundle": "ANALYZE=true yarn build",
     "start": "next start",
