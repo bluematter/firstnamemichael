@@ -1,0 +1,6 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+/* @import './prism.css'; */
+@import 'tailwindcss/utilities';
+
+/* Any other CSS rules or custom styles should go here, after the @import statements */

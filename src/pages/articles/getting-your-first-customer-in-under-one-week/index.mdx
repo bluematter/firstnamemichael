@@ -1,0 +1,86 @@
+import { ArticleLayout } from '@/components/ArticleLayout';
+import Image from 'next/image';
+import Head from 'next/head';
+
+export const meta = {
+  author: 'Michael Aubry',
+  date: '2023-03-04',
+  title: 'Getting your first customer in under one week',
+  description:
+    'Speed is your friend when starting a business. My first software it took me months/years to get the first customer. This time around I went from thought to customer in under one week. I will share my thoughts and some examples on how I did that.',
+};
+
+export default (props) => <ArticleLayout meta={meta} {...props} />;
+
+<Head>
+  <meta
+    name='image'
+    content='https://motionbox-public.b-cdn.net/images/og/product-market-fit-is-a-grind.png'
+  />
+  <meta
+    name='twitter:image'
+    content='https://motionbox-public.b-cdn.net/images/og/product-market-fit-is-a-grind.png'
+  />
+  <meta
+    name='twitter:title'
+    content='Getting your first customer in under one week'
+  />
+</Head>
+
+The early days of your entrepreneurial journey will be spent paying ignorance debt. You don't know what you don't know, despite all the advice out there (which should save you time but you're still human).
+
+Much advice like this might not make sense, but if I could encourage one thing, that would be to fail fast, because you will fail.
+
+In this article I am going to explain how to quickly and cheaply get your first customer. I just did this the first week of March with my co founder, so I know this advice works.
+
+_Stripe payment below we got $100 from our first paying customer in our new product launch._
+
+<Image
+  width={1284 / 4}
+  height={2778 / 4}
+  src='https://motionbox-public.b-cdn.net/images/blog/IMG_8213.PNG'
+/>
+
+Lets crack into some practical steps and some thoughts to help breakdown how we did this.
+
+## Do things manually
+
+It's as simple as the title suggests. Spend your mental energy focusing on the job that needs to be done. It will take time and effort to figure out what the end result for someone is. Think of it initially as a service (sort of). Some common services we all know (which are hard to scale) web design, marketing, and design.
+
+We are not making this a full fledge service to be clear, think of more specific tasks that are repetitive or cost money/time for a specific audience following a specific set of patterns (because we eventually want to scale, but early on are treating it like a service to get validation).
+
+For us it was rendering 100+ personalized videos, people are already using email tools that send multiple messages, people are heavily adopting video messaging. This is something we can leverage into a software, it eventually needs to be able to run on it's own with a UI.
+
+The natural thing to do for most beginners would be to start developing a software product, with a login, a database, git, deployment, they would spend time mocking up the UI, etc. This is dead wrong in most cases, remember software (in my view) is meant to be a scalable vehicle to get a user to a desired end outcome.
+
+Lets focus on the end outcome first and deliver it, even if its manual labor, because this is all a customer cares about (the outcome). All we care about is <a href='https://www.michaelaubry.com/articles/product-market-fit-is-a-grind' target='_blank' rel='noopener noreferrer'>Product Market Fit</a> and running cheap experiments to validate there is demand via collecting payments.
+
+## Selling an outcome
+
+If you set things up correctly, the job to be done should be able to be ran in some sort of a script (ideally on your local machine). You don't need a fancy server or even git.
+
+I would start by writing a Node.js script on your local machine, or a Python script, perhaps even a bash script depending on your skill level. If you don't know how to code you can hire an engineer to focus only on writing a script that gets the job done, keep it super simple early on.
+
+Do not spend too much time on this, manually figure out all the steps required to get the job done, then package it into the script and focus 80%+ of your time selling the solution. Use tools like Apollo.io, sales navigator, and get aggressive. If you send 1000 messages and the responses are dull, perhaps your offer isn't compelling enough.
+
+If it's not getting praise, then you might not be on the right track with your solution, if this is the case, you can keep tweaking your messaging until you hit a bullseye. Thankfully you did not build a full fledge software after months of laboring away.
+
+## Collect payment
+
+After iteration and figuring out how the desired outcome looks like by getting some signals in the market from your conversations, you now have a better idea what to build. When you find someone who is truly hungry for your offer they will want it and it's your job to simply create a Stripe invoice page and collect payment.
+
+If you're in a hot market there is no reason why you can't make a sale within 1-2 weeks with enough dedication. By having the payment you can confidently say that you have a good idea on what the job to be done is and what the avatar looks like.
+
+## Deliver the goods
+
+This is where we are at currently. I wrote a script that generates 100 personalized videos and am delivering it to our first customer. We will analyze the feedback and observe the customers avatar so that we can replicate this 10 more times.
+
+Eventually when we are super clear about the avatar, the offer, and desired outcome. It will be 10x easier to reverse engineer from there and develop a software that scales to 100-1000 customers.
+
+## Final thoughts
+
+Before this approach I spent 1 year building a product and 3 months after that I did not know who I was selling to. I was lost, and thankfully through enough desperation I finally got a customer 1.5 years in. However, I was still lost because I was focused on the product purely and not on the customer.
+
+That pain has lead me to this approach and within 1 week we got our first customer, understand the problem, and the avatar. Starting here makes the scaling process much easier and is built on a solid foundation.
+
+If this helped you in away, then I am grateful I was able to make an impact and if you want more, please consider subscribing to the newsletter by adding your email below.
