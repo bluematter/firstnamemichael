@@ -1,10 +1,9 @@
 import rehypePrism from '@mapbox/rehype-prism';
-import nextMDX from '@next/mdx';
 import remarkGfm from 'remark-gfm';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['tsx', 'js', 'jsx', 'mdx'],
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 
   eslint: {
     dirs: ['src'],
@@ -17,13 +16,9 @@ const nextConfig = {
           loaders: ['@svgr/webpack'],
           as: '*.js',
         },
-        '*.mdx': {
-          loaders: ['@mdx-js/loader'],
-          as: '*.js',
-        },
       },
     },
-    // serverMinification: false,
+    mdxRs: true,
     missingSuspenseWithCSRBailout: false,
     serverComponentsExternalPackages: ['@google-cloud/storage'],
   },
@@ -31,7 +26,6 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 
-  // Uncoment to add domain whitelist
   images: {
     domains: [
       'images.unsplash.com',
@@ -40,25 +34,22 @@ const nextConfig = {
     ],
   },
 
-  // SVGR
-  webpack(config) {
-    // Grab the existing rule that handles SVG imports
+  webpack: (config) => {
+    // SVG handling
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.('.svg')
     );
 
     config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
       {
         ...fileLoaderRule,
         test: /\.svg$/i,
-        resourceQuery: /url/, // *.svg?url
+        resourceQuery: /url/,
       },
-      // Convert all other *.svg imports to React components
       {
         test: /\.svg$/i,
         issuer: { not: /\.(css|scss|sass)$/ },
-        resourceQuery: { not: /url/ }, // exclude if *.svg?url
+        resourceQuery: { not: /url/ },
         loader: '@svgr/webpack',
         options: {
           dimensions: false,
@@ -67,10 +58,9 @@ const nextConfig = {
       }
     );
 
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
 
-    // Add MDX handling
+    // MDX handling
     config.module.rules.push({
       test: /\.mdx?$/,
       use: [
@@ -88,12 +78,4 @@ const nextConfig = {
   },
 };
 
-const withMDX = nextMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypePrism],
-  },
-});
-
-export default withMDX(nextConfig);
+export default nextConfig;
