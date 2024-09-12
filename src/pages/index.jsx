@@ -63,7 +63,7 @@ export default function Home({ articles }) {
       </Head>
       <Container className='mt-9'>
         <div className='flex flex-col space-x-8 lg:flex-row'>
-          <div className='w-[60%]'>
+          <div className='sm:w-[60%]'>
             <h1 className='text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl'>
               Hi, I'm Michael Aubry 👋
             </h1>
