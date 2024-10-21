@@ -1,18 +1,9 @@
+/* eslint-disable no-console */
 import clsx from 'clsx';
-import { gql, request } from 'graphql-request';
 import Image from 'next/image';
 import { SyntheticEvent, useState } from 'react';
 
 import { Button } from '@/components/Button';
-
-const CREATE_USER = gql`
-  mutation ($email: String!) {
-    createUser(email: $email) {
-      id
-      email
-    }
-  }
-`;
 
 interface INewsletterProps {
   minimal?: boolean;
@@ -25,36 +16,42 @@ export default function Newsletter({ minimal }: INewsletterProps) {
 
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const formData = new FormData(e.target as any);
-    const { email } = Object.fromEntries(formData.entries());
+    const formData = new FormData(e.target as HTMLFormElement);
+    const email = formData.get('email') as string;
 
     try {
       setLoading(true);
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const data: any = await request(
+      const baseUrl =
         process.env.NODE_ENV === 'development'
-          ? 'http://localhost:3001/api'
-          : 'https://michaelaubry-prisma.vercel.app/api',
-        CREATE_USER,
-        {
-          email,
-        }
-      );
+          ? 'http://localhost:3000'
+          : 'https://www.michaelaubry.com';
 
-      if (data?.createUser?.id) {
-        setSuccess(data);
-      } else {
-        setError(data);
+      const response = await fetch(`${baseUrl}/api/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'An error occurred');
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (e: any) {
-      if (e.message.includes('Email already exists')) {
-        setError('Email already exists');
+      setSuccess(data);
+    } catch (error) {
+      console.error('Subscription error:', error);
+      if (error instanceof Error) {
+        if (error.message.includes('Email already exists')) {
+          setError('This email is already subscribed.');
+        } else {
+          setError(error.message);
+        }
       } else {
-        setError('There was an error');
+        setError('An unexpected error occurred. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -122,7 +119,7 @@ export default function Newsletter({ minimal }: INewsletterProps) {
             aria-label='Email address'
             required
             name='email'
-            className='min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm'
+            className='min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 sm:text-sm dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10'
           />
           <Button type='submit' className='ml-4 flex-none'>
             {loading ? (
