@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { formatDate } from '@/lib/formatDate';
@@ -15,7 +14,6 @@ import {
   LinkedInIcon,
   TwitterIcon,
 } from '@/components/SocialIcons';
-
 
 function Article({ article }) {
   return (
@@ -55,21 +53,17 @@ export default function Home({ articles }) {
         </title>
         <meta
           name='description'
-          content='I’m Michael, a software designer and entrepreneur based in San
-          Diego. I’m the founder of Motionbox, where we develop video sales
-          solutions that empower teams to sell more stuff, faster. Follow me
-          on social and join my newsletter 👇'
+          content={`Hi, I'm Michael Aubry 👋. A tech entrepreneur based in San Diego. I'm the founder of Based Labs, where we develop AI tools. Follow me on social and join my newsletter for quality content.`}
         />
       </Head>
       <Container className='mt-9'>
-        <div className='flex flex-col space-x-8 lg:flex-row'>
-          <div className='sm:w-[60%]'>
-            <h1 className='text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl'>
+        <div className='flex flex-col space-y-4 lg:flex-row lg:space-x-8'>
+          <div className='lg:w-[50%]'>
+            <h1 className='text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100'>
               Hi, I'm Michael Aubry 👋
             </h1>
             <p className='mt-6 text-base text-zinc-600 dark:text-zinc-400'>
-              I'm Michael, a software designer and entrepreneur based in San
-              Diego. I'm the founder of{' '}
+              A tech entrepreneur based in San Diego. I'm the founder of{' '}
               <a
                 className='font-medium italic text-teal-500'
                 href='https://www.basedlabs.ai'
@@ -78,7 +72,8 @@ export default function Home({ articles }) {
               >
                 BasedLabs
               </a>
-              , where we develop the most based AI tools. Follow me on social and join my newsletter 👇
+              , where we develop AI tools. Follow me on social and join my
+              newsletter for quality content 👇
             </p>
 
             <div className='mt-6 flex gap-2'>
@@ -108,16 +103,18 @@ export default function Home({ articles }) {
             </div>
           </div>
           <div className='flex items-center lg:mt-0 lg:flex-1'>
-            <div className='w-full'>
-              <Image
-                alt='Michael Aubry'
-                src="https://cdn.basedlabs.ai/f8f84d40-6b51-11ef-8dfc-efc6c10724c7.mp4"
-                layout='responsive'
-                width={16}
-                height={16}
-                objectFit='cover'
-                className='rounded-lg'
-              />
+            <div className='h-full w-full'>
+              <video
+                src='https://cdn.basedlabs.ai/michaelaubry_hero.mp4?t=0'
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls
+                className='h-full w-full rounded-lg object-cover'
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         </div>
